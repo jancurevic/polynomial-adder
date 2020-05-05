@@ -1,0 +1,24 @@
+{
+  "name": "polynomial-adder",
+  "version": "1.0.0",
+  "description": "Basic app to add two polynomials which are of the form Ax^a + Bx^b ...",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jancurevic/polynomial-adder.git"
+  },
+  "author": "MJ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jancurevic/polynomial-adder/issues"
+  },
+  "homepage": "https://github.com/jancurevic/polynomial-adder#readme",
+  "devDependencies": {
+    "jest": "^26.0.1"
+  },
+  "dependencies": {}
+}
