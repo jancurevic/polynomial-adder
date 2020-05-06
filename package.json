@@ -4,7 +4,7 @@
   "description": "Basic app to add two polynomials which are of the form Ax^a + Bx^b ...",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node ./src/index.js",
     "test": "jest"
   },
   "repository": {

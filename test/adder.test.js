@@ -1,17 +1,31 @@
 const polyAdder = require("../src/adder");
 const validators = require("../src/validators");
 
-test("Polynomial should have at least 1 element", ()=> {
+test("polynomial should have at least 1 element", () => {
+  const a = [{ pow: 7, coef: 5 }];
+  expect(validators.checkLength(a)).toBe(true);
+  const b = [];
+  expect(validators.checkLength(b)).toBe(false);
+});
+
+test("polynomial element coefficient can't be equal to 0", () => {
   const a = [
-    { pow: 7, coef: 5 }
+    { pow: 7, coef: 5 },
+    { pow: -3, coef: 1 },
+    { pow: 2, coef: 5 },
   ];
 
-  expect(validators.checkLength(a)).toBe(true);
+  expect(validators.checkIfCoefNotZero(a)).toMatchObject([]);
 
-  const b = [];
+  const b = [
+    { pow: 7, coef: 0 },
+    { pow: -3, coef: 1 },
+    { pow: 2, coef: 5 },
+  ];
 
-  expect(validators.checkLength(b)).toBe(false);
-})
+  const result = validators.checkIfCoefNotZero(b).length;
+  expect(result).toBeGreaterThan(0);
+});
 
 test("type of pow and coef fields in a single object should be number", () => {
   let a = [
@@ -66,7 +80,7 @@ test("polynomial should only have unique pows", () => {
   expect(validators.checkIfNotSamePow(a)).toBe(false);
 });
 
-test("polynomials should added correctly", () => {
+test("polynomials should be added correctly", () => {
   let a = [
     { pow: 7, coef: 5 },
     { pow: 3, coef: 1 },
@@ -106,6 +120,8 @@ test("should be valid polynomials and should be added correctly", () => {
   expect(validators.checkLength(b)).toBe(true);
   expect(validators.checkIfNumber(a)).toMatchObject([]);
   expect(validators.checkIfNumber(b)).toMatchObject([]);
+  expect(validators.checkIfCoefNotZero(a)).toMatchObject([]);
+  expect(validators.checkIfCoefNotZero(b)).toMatchObject([]);
   expect(validators.checkIfNotSamePow(a)).toBe(true);
   expect(validators.checkIfNotSamePow(b)).toBe(true);
 
@@ -124,6 +140,8 @@ test("should be valid polynomials and should be added correctly", () => {
   expect(validators.checkLength(b)).toBe(true);
   expect(validators.checkIfNumber(a)).toMatchObject([]);
   expect(validators.checkIfNumber(b)).toMatchObject([]);
+  expect(validators.checkIfCoefNotZero(a)).toMatchObject([]);
+  expect(validators.checkIfCoefNotZero(b)).toMatchObject([]);
   expect(validators.checkIfNotSamePow(a)).toBe(true);
   expect(validators.checkIfNotSamePow(b)).toBe(true);
 
