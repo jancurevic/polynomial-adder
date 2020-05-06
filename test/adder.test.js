@@ -1,6 +1,18 @@
 const polyAdder = require("../src/adder");
 const validators = require("../src/validators");
 
+test("Polynomial should have at least 1 element", ()=> {
+  const a = [
+    { pow: 7, coef: 5 }
+  ];
+
+  expect(validators.checkLength(a)).toBe(true);
+
+  const b = [];
+
+  expect(validators.checkLength(b)).toBe(false);
+})
+
 test("type of pow and coef fields in a single object should be number", () => {
   let a = [
     { pow: 7, coef: 5 },
@@ -90,6 +102,8 @@ test("should be valid polynomials and should be added correctly", () => {
     { pow: 3, coef: 5 },
   ];
 
+  expect(validators.checkLength(a)).toBe(true);
+  expect(validators.checkLength(b)).toBe(true);
   expect(validators.checkIfNumber(a)).toMatchObject([]);
   expect(validators.checkIfNumber(b)).toMatchObject([]);
   expect(validators.checkIfNotSamePow(a)).toBe(true);
@@ -106,6 +120,8 @@ test("should be valid polynomials and should be added correctly", () => {
   a = [{ pow: 0, coef: 1 }];
   b = [{ pow: 0, coef: -10 }];
 
+  expect(validators.checkLength(a)).toBe(true);
+  expect(validators.checkLength(b)).toBe(true);
   expect(validators.checkIfNumber(a)).toMatchObject([]);
   expect(validators.checkIfNumber(b)).toMatchObject([]);
   expect(validators.checkIfNotSamePow(a)).toBe(true);

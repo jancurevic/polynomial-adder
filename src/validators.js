@@ -5,7 +5,10 @@ const checkIfNotSamePow = a => {
   return new Set(a).size === a.length;
 }
 
+const checkLength = a => a.length > 0;
+
 module.exports = {
   checkIfNumber,
-  checkIfNotSamePow
+  checkIfNotSamePow,
+  checkLength
 };
