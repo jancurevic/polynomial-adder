@@ -2,7 +2,7 @@ const polyAdder = require("../src/adder");
 const validators = require("../src/validators");
 
 test("type of pow and coef fields in a single object should be number", () => {
-  const a = [
+  let a = [
     { pow: 7, coef: 5 },
     { pow: -3, coef: 1 },
     { pow: 2, coef: 5 },
@@ -13,9 +13,22 @@ test("type of pow and coef fields in a single object should be number", () => {
   ];
 
   expect(validators.checkIfNumber(a)).toMatchObject([]);
+
+  a = [
+    { pow: 7, coef: 5 },
+    { pow: 1, coef: 1 },
+    { pow: NaN, coef: 5 },
+    { pow: 10, coef: -5 },
+    { pow: 20, coef: 5 },
+    { pow: 0, coef: 123 },
+    { pow: -5, coef: 51 },
+  ];
+
+  const result = validators.checkIfNumber(a).length;
+  expect(result).toBeGreaterThan(0);
 });
 
-test("polynomial should have onlyn unique pows", () => {
+test("polynomial should only have unique pows", () => {
   let a = [
     { pow: 7, coef: 5 },
     { pow: -3, coef: 1 },
@@ -27,6 +40,18 @@ test("polynomial should have onlyn unique pows", () => {
   ];
 
   expect(validators.checkIfNotSamePow(a)).toBe(true);
+
+  a = [
+    { pow: 7, coef: 5 },
+    { pow: 7, coef: 1 },
+    { pow: 2, coef: 5 },
+    { pow: 10, coef: -5 },
+    { pow: 20, coef: 5 },
+    { pow: 0, coef: 123 },
+    { pow: -5, coef: 51 },
+  ];
+
+  expect(validators.checkIfNotSamePow(a)).toBe(false);
 });
 
 test("polynomials should added correctly", () => {
